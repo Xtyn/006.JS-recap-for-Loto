@@ -25,5 +25,12 @@
     const computerMove = pickComputerMove();
     playGame('scissor');
   ">scissor</button>
+
+  <button class="rps-button" onclick="
+    score.wins = 0;
+    score.loses = 0;
+    score.ties = 0;
+    localStorage.removeItem('savedScore');
+  ">Reset score</button>
 </body>
 </html>

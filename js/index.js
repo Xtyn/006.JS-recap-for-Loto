@@ -1,3 +1,63 @@
+let score = JSON.parse(localStorage.getItem('savedScore')) || {
+  wins: 0,
+  loses: 0,
+  ties:0
+}; 
+
+function playGame(playerMove) {
+  const computerMove = pickComputerMove();
+  let resultRPS = '';
+
+  if(playerMove === 'paper') {
+    if(computerMove === 'rock') {
+        resultRPS = 'You win';
+      }
+    else if(computerMove === 'paper') {
+        resultRPS = 'Tie';
+      } 
+    else if(computerMove === 'scissor') {
+        resultRPS = 'You lose';
+      }
+  } 
+  else if(playerMove === 'rock') {
+    if(computerMove === 'rock') {
+          resultRPS = 'Tie';
+        } 
+    else if(computerMove === 'paper') {
+          resultRPS = 'You lose';
+        } 
+    else if(computerMove === 'scissor') {
+          resultRPS = 'You win';
+        }   
+  }
+  else if(playerMove === 'scissor') {
+    if(computerMove === 'rock') {
+        resultRPS = 'You lose';
+      } 
+    else if(computerMove === 'paper') {
+        resultRPS = 'You win';
+      }
+    else if(computerMove === 'scissor') {
+        resultRPS = 'Tie';
+      }
+  }
+
+  if(resultRPS === 'You win') {
+      score.wins += 1;
+    }
+    else if(resultRPS === 'You lose') {
+      score.loses += 1;
+    }
+    else if(resultRPS === 'Tie') {
+      score.ties += 1;
+    }
+
+    localStorage.setItem('savedScore',JSON.stringify(score));
+
+  alert(`You picked ${playerMove}, computer picked ${computerMove}. ${resultRPS}
+Wins:${score.wins}, Loses:${score.loses}, Ties:${score.ties} `);
+}
+
 function pickComputerMove() {
   const randomNumber = Math.random();
   let computerMove = '';
@@ -12,46 +72,4 @@ function pickComputerMove() {
     computerMove = 'scissor';
   }
   return computerMove;
-}
-
-function playGame(playerMove) {
-  const computerMove = pickComputerMove();
-  let resultRPS = '';
-
-  if(playerMove === 'paper') {
-    if(computerMove === 'rock') {
-        resultRPS = 'Win';
-      }
-    else if(computerMove === 'paper') {
-        resultRPS = 'Tie';
-      } 
-    else if(computerMove === 'scissor') {
-        resultRPS = 'Lose';
-      }
-    alert(`You picked ${playerMove}, computer picked ${computerMove}. ${resultRPS}`);
-  } 
-  else if(playerMove === 'rock') {
-    if(computerMove === 'rock') {
-          resultRPS = 'Tie';
-        } 
-    else if(computerMove === 'paper') {
-          resultRPS = 'Lose';
-        } 
-    else if(computerMove === 'scissor') {
-          resultRPS = 'Win';
-        }
-    alert(`You picked ${playerMove}, computer picked ${computerMove}. ${resultRPS}`);
-  }
-  else if(playerMove === 'scissor') {
-    if(computerMove === 'rock') {
-        resultRPS = 'Lose';
-      } 
-    else if(computerMove === 'paper') {
-        resultRPS = 'Win';
-      }
-    else if(computerMove === 'scissor') {
-        resultRPS = 'Tie';
-      }
-    alert(`You picked ${playerMove}, computer picked ${computerMove}. ${resultRPS}`);
-  }
 }
